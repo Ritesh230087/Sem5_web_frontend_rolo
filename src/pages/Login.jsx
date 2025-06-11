@@ -20,10 +20,7 @@ export default function Login() {
         <div>
             <div>Login</div>
             <NavLink to="/">Go back</NavLink>
-            <Link to="/register">Register</Link>
-            <button onClick={returnToHome}>Button Click</button>
-            <button onClick={(event) => returnToHome(event)}>Button Click Callback</button>
-
+            <Link to="/register">Sign Up</Link>
             <div>
                 <LoginForm />
             </div>
