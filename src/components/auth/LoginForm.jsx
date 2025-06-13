@@ -1,60 +1,102 @@
-import React from 'react'
-import { useFormik } from "formik"
-import * as Yup from "yup"
-import { useLoginUser } from '../../hooks/useLoginUser'
+import { useState } from "react";
+import { Eye, EyeOff } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { loginUserApi } from "../../api/authApi";
 
-export default function LoginForm() {
-    const { mutate, data, error, isPending } = useLoginUser()
+export function LoginForm() {
+  const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    rememberMe: false,
+  });
 
-    const validationSchema = Yup.object({
-        email: Yup.string().email("Invalid email").required("Please fill email"),
-        password: Yup.string().min(8, "Password needs 8 characters").required("Please fill password")
-    })
+  const navigate = useNavigate();
 
-    const formik = useFormik({
-        initialValues: {
-            email: "",
-            password: ""
-        },
-        validationSchema,
-        onSubmit: (values) => {
-            mutate(values)
-        }
-    })
+  const handleInputChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
 
-    return (
-        <div>
-            LoginForm
-            <form onSubmit={formik.handleSubmit}>
-                <label>Email</label>
-                <input
-                    type='email'
-                    name='email'
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.email}
-                />
-                {formik.touched.email && formik.errors.email && (
-                    <p>{formik.errors.email}</p>
-                )}
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    try {
+      const response = await loginUserApi(formData);
+      toast.success("Login successful!");
+      navigate("/home");
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Login failed");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-                <label>Password</label>
-                <input
-                    type='password'
-                    name='password'
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.password}
-                />
-                {formik.touched.password && formik.errors.password && (
-                    <p>{formik.errors.password}</p>
-                )}
+  return (
+    <form onSubmit={handleSubmit} className="form">
+      <div className="input-group">
+        <label htmlFor="email" className="label">Email</label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          className="input"
+          value={formData.email}
+          onChange={handleInputChange}
+          placeholder="Enter your email"
+          required
+        />
+      </div>
 
-                <button type='submit'>Login</button>
-
-                {error && <p>{error.message}</p>}
-                {data && <p>{data.message}</p>}
-            </form>
+      <div className="input-group">
+        <label htmlFor="password" className="label">Password</label>
+        <div className="password-container">
+          <input
+            id="password"
+            name="password"
+            type={showPassword ? "text" : "password"}
+            className="input password-input"
+            value={formData.password}
+            onChange={handleInputChange}
+            placeholder="Enter your password"
+            required
+          />
+          <button type="button" className="password-toggle" onClick={() => setShowPassword(!showPassword)}>
+            {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+          </button>
         </div>
-    )
+      </div>
+
+      <div className="remember-container">
+        <div className="checkbox-group">
+          <input
+            id="rememberMe"
+            name="rememberMe"
+            type="checkbox"
+            className="checkbox"
+            checked={formData.rememberMe}
+            onChange={handleInputChange}
+          />
+          <label htmlFor="rememberMe" className="checkbox-label">Remember me</label>
+        </div>
+        <a href="#" className="forgot-link">Forgot password?</a>
+      </div>
+
+      <button type="submit" disabled={isLoading} className="btn btn-primary">
+        {isLoading ? (
+          <>
+            <div className="spinner animate-spin"></div>
+            Signing in...
+          </>
+        ) : (
+          "Sign in"
+        )}
+      </button>
+    </form>
+  );
 }

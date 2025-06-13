@@ -1,4 +1,4 @@
-import axios from "./api"; // or directly from axios if not using axios.js wrapper
+import axios from "./api"; 
 
 export const loginUserApi = (data) => axios.post("/auth/login", data);
 export const registerUserApi = (data) => axios.post("/auth/register", data);
