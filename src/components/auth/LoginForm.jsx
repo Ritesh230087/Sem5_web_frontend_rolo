@@ -1,11 +1,9 @@
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import { loginUserApi } from "../../api/authApi";
+import { useLoginUser } from "../../hooks/useLoginUser";
 
 export function LoginForm() {
-  const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
@@ -14,6 +12,7 @@ export function LoginForm() {
   });
 
   const navigate = useNavigate();
+  const { mutate, isLoading } = useLoginUser();
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -23,18 +22,13 @@ export function LoginForm() {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setIsLoading(true);
-    try {
-      const response = await loginUserApi(formData);
-      toast.success("Login successful!");
-      navigate("/home");
-    } catch (error) {
-      toast.error(error.response?.data?.message || "Login failed");
-    } finally {
-      setIsLoading(false);
-    }
+    mutate(formData, {
+      onSuccess: () => {
+        navigate("/home");
+      }
+    });
   };
 
   return (

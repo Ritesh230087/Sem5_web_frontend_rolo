@@ -1,4 +1,4 @@
-import { RegisterForm } from "../components/auth/RegisterForm"
+import { RegisterForm } from "../components/auth/RegisterForm";
 
 export default function Register() {
   return (
@@ -21,7 +21,9 @@ export default function Register() {
         </div>
 
         {/* Brand Tagline */}
-        <p className="brand-tagline">A Tapestry of Nepalese Heritage • Crafted In Nepal</p>
+        <p className="brand-tagline">
+          A Tapestry of Nepalese Heritage • Crafted In Nepal
+        </p>
 
         {/* Login Link */}
         <div className="nav-links">
@@ -34,5 +36,5 @@ export default function Register() {
         </div>
       </div>
     </div>
-  )
+  );
 }

@@ -2,10 +2,10 @@ import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { registerUserApi } from "../../api/authApi";
+import { useRegisterUser } from "../../hooks/useRegisterUser"; // local state hook
+import { useRegisterUser as useRegisterUserTan } from "../../hooks/useRegisterUserTan"; // tanstack query hook
 
 export function RegisterForm() {
-  const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [formData, setFormData] = useState({
@@ -18,6 +18,8 @@ export function RegisterForm() {
   });
 
   const navigate = useNavigate();
+  const { register, isLoading } = useRegisterUser(); // for fallback
+  const registerMutation = useRegisterUserTan(); // React Query-based mutation
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -40,16 +42,16 @@ export function RegisterForm() {
       return;
     }
 
-    setIsLoading(true);
-    try {
-      await registerUserApi(formData);
-      toast.success("Registration successful!");
-      navigate("/login");
-    } catch (error) {
-      toast.error(error.response?.data?.message || "Registration failed");
-    } finally {
-      setIsLoading(false);
-    }
+    registerMutation.mutate(formData, {
+      onSuccess: () => {
+        toast.success("Registration successful!");
+        navigate("/login");
+      },
+      onError: (error) => {
+        toast.error(error?.message || "Registration failed");
+      },
+    });
+
   };
 
   return (
@@ -150,8 +152,8 @@ export function RegisterForm() {
         </label>
       </div>
 
-      <button type="submit" disabled={isLoading} className="btn btn-primary">
-        {isLoading ? (
+      <button type="submit" disabled={isLoading || registerMutation.isLoading} className="btn btn-primary">
+        {isLoading || registerMutation.isLoading ? (
           <>
             <div className="spinner animate-spin"></div>
             Creating account...

@@ -1,12 +1,6 @@
-"use client"
-
-import { useState } from "react"
-import { LoginForm } from "../components/auth/LoginForm"
-import { RegisterForm } from "../components/auth/RegisterForm"
+import { LoginForm } from "../components/auth/LoginForm";
 
 export default function Login() {
-  const [activeTab, setActiveTab] = useState("login")
-
   return (
     <div className="auth-container">
       <div className="auth-wrapper">
@@ -15,50 +9,32 @@ export default function Login() {
           <img src="/images/Rolo Logo.jpeg" alt="ROLO Logo" className="logo" />
         </div>
 
-        {/* Auth Card */}
+        {/* Login Card */}
         <div className="auth-card">
-          {/* Tab Navigation */}
           <div className="tab-navigation">
-            <button
-              className={`tab-button ${activeTab === "login" ? "active" : "inactive"}`}
-              onClick={() => setActiveTab("login")}
-            >
-              Login
-            </button>
-            <button
-              className={`tab-button ${activeTab === "register" ? "active" : "inactive"}`}
-              onClick={() => setActiveTab("register")}
-            >
-              Register
-            </button>
+            <div className="tab-button active">Login</div>
           </div>
 
-          {/* Form Content */}
-          <div className="form-container">{activeTab === "login" ? <LoginForm /> : <RegisterForm />}</div>
+          <div className="form-container">
+            <LoginForm />
+          </div>
         </div>
 
         {/* Brand Tagline */}
-        <p className="brand-tagline">A Tapestry of Nepalese Heritage • Crafted In Nepal</p>
+        <p className="brand-tagline">
+          A Tapestry of Nepalese Heritage • Crafted In Nepal
+        </p>
 
-        {/* Navigation Links */}
+        {/* Register Link */}
         <div className="nav-links">
-          {activeTab === "login" ? (
-            <p className="nav-text">
-              Don't have an account?{" "}
-              <button onClick={() => setActiveTab("register")} className="nav-link">
-                Sign up here
-              </button>
-            </p>
-          ) : (
-            <p className="nav-text">
-              Already have an account?{" "}
-              <button onClick={() => setActiveTab("login")} className="nav-link">
-                Sign in here
-              </button>
-            </p>
-          )}
+          <p className="nav-text">
+            Don't have an account? {" "}
+            <a href="/register" className="nav-link">
+              Sign up here
+            </a>
+          </p>
         </div>
       </div>
     </div>
-  )
+  );
 }
