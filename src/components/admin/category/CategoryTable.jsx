@@ -5,7 +5,6 @@ import "../../../styles/dashboard.css";
 export default function CategoryTable({ categories, removeCategory, editCategory, viewCategory }) {
   return (
     <div className="admin-table-wrapper">
-      {/* <h2 className="page-title">Category Management</h2> */}
       <table className="admin-table">
         <thead>
           <tr>

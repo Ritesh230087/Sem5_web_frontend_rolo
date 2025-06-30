@@ -1,7 +1,7 @@
 Dashboard.jsx
 import Sidebar from "./Sidebar";
 import { Outlet } from "react-router-dom";
-import "../../styles/dashboard.css";
+import "../styles/dashboard.css";
 
 export default function Dashboard() {
   return (
@@ -14,6 +14,7 @@ export default function Dashboard() {
             className="logout-button-top"
             onClick={() => {
               localStorage.removeItem("token");
+              localStorage.removeItem("user");
               window.location.href = "/login";
             }}
           >
