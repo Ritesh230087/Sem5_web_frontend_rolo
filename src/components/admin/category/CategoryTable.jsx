@@ -9,7 +9,7 @@ export default function CategoryTable({ categories, removeCategory, editCategory
         <thead>
           <tr>
             <th>Name</th>
-            <th>Image</th>
+            <th style={{ width: "120px" }}>Image</th> 
             <th>Action</th>
           </tr>
         </thead>
@@ -17,7 +17,7 @@ export default function CategoryTable({ categories, removeCategory, editCategory
           {categories?.map((c) => (
             <tr key={c._id}>
               <td>{c.name}</td>
-              <td>
+              <td style={{ textAlign: "center" }}>
                 {c.filepath ? (
                   <img
                     src={getBackendImageUrl(c.filepath)}
@@ -46,4 +46,3 @@ export default function CategoryTable({ categories, removeCategory, editCategory
     </div>
   );
 }
-
