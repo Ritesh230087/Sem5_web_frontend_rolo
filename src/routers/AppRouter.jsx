@@ -2,6 +2,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "../pages/Login";
 import Signup from "../pages/Register";
 import HomePage from "../pages/Homepage";
+import ProductDetail from "../pages/product/productDetail";
+
 
 import AdminUserRoute from "./AdminUserRoute";
 import NormalUserRoute from "./NormalUserRoute";
@@ -14,6 +16,7 @@ import UserManagement from "../pages/admin/UserManagement";
 import CategoryManagement from "../pages/admin/CategoryManagement";
 import ProductManagement from "../pages/admin/ProductManagement";
 import OrderManagement from "../pages/admin/OrderManagement";
+import RibbonManagement from "../pages/admin/RibbonManagement";
 
 export default function AppRouter() {
   return (
@@ -31,6 +34,7 @@ export default function AppRouter() {
         <Route element={<NormalUserRoute />}>
           <Route element={<UserLayout />}>
             <Route path="/homepage" element={<HomePage />} />
+            <Route path="/product/:id" element={<ProductDetail />} />
           </Route>
         </Route>
 
@@ -41,6 +45,7 @@ export default function AppRouter() {
             <Route path="users" element={<UserManagement />} />
             <Route path="categories" element={<CategoryManagement />} />
             <Route path="products" element={<ProductManagement />} />
+            <Route path="ribbons" element={<RibbonManagement />} />
             <Route path="orders" element={<OrderManagement />} />
             <Route path="*" element={<>Admin Page Not Found</>} />
           </Route>

@@ -1,84 +1,161 @@
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
+// import {
+//   fetchCategories,
+//   createCategoryApi,
+//   updateCategory,
+//   deleteCategoryApi,
+//   fetchCategoryById,
+// } from "../../services/admin/categoryService";
+
+// export function useCategory() {
+//   const [categories, setCategories] = useState([]);
+//   const [loading, setLoading] = useState(false);
+//   const [error, setError] = useState(null);
+
+//   // Fetch categories
+//   const loadCategories = async () => {
+//     try {
+//       setLoading(true);
+//       const data = await fetchCategories();
+//       setCategories(data);
+//     } catch (err) {
+//       setError(err.message || "Error loading categories");
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   useEffect(() => {
+//     loadCategories();
+//   }, []);
+
+//   // Add category
+//   const addCategory = async (category) => {
+//     try {
+//       setLoading(true);
+//       await createCategoryApi(category);
+//       await loadCategories();
+//     } catch (err) {
+//       setError(err.message || "Error creating category");
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   // Edit category
+//   const editCategory = async (id, category) => {
+//     try {
+//       setLoading(true);
+//       await updateCategory(id, category);
+//       await loadCategories();
+//     } catch (err) {
+//       setError(err.message || "Error updating category");
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   // Remove category
+//   const removeCategory = async (id) => {
+//     try {
+//       setLoading(true);
+//       await deleteCategoryApi(id);
+//       await loadCategories();
+//     } catch (err) {
+//       setError(err.message || "Error deleting category");
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   // Fetch one category details (for view/edit)
+//   const getCategoryById = async (id) => {
+//     try {
+//       setLoading(true);
+//       const category = await fetchCategoryById(id);
+//       return category;
+//     } catch (err) {
+//       setError(err.message || "Error fetching category");
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   return {
+//     categories,
+//     loading,
+//     error,
+//     addCategory,
+//     editCategory,
+//     removeCategory,
+//     getCategoryById,
+//   };
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import { useEffect, useState } from "react";
 import {
   fetchCategories,
+  fetchCategoryById,
   createCategory,
   updateCategory,
   deleteCategory,
-  fetchCategoryById,
-} from "../../api/categoryApi";
+} from "../../services/admin/categoryService";
 
 export function useCategory() {
   const [categories, setCategories] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-  // Fetch categories
-  const loadCategories = async () => {
-    try {
-      setLoading(true);
-      const data = await fetchCategories();
-      setCategories(data);
-    } catch (err) {
-      setError(err.message || "Error loading categories");
-    } finally {
-      setLoading(false);
-    }
-  };
-
+  // Load all categories on mount
   useEffect(() => {
     loadCategories();
   }, []);
 
-  // Add category
+  const loadCategories = async () => {
+    setLoading(true);
+    try {
+      const data = await fetchCategories();
+      setCategories(data);
+    } catch (err) {
+      setError(err.message || "Failed to fetch categories");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const addCategory = async (category) => {
-    try {
-      setLoading(true);
-      await createCategory(category);
-      await loadCategories();
-    } catch (err) {
-      setError(err.message || "Error creating category");
-    } finally {
-      setLoading(false);
-    }
+    await createCategory(category);
+    await loadCategories();
   };
 
-  // Edit category
   const editCategory = async (id, category) => {
-    try {
-      setLoading(true);
-      await updateCategory(id, category);
-      await loadCategories();
-    } catch (err) {
-      setError(err.message || "Error updating category");
-    } finally {
-      setLoading(false);
-    }
+    await updateCategory(id, category);
+    await loadCategories();
   };
 
-  // Remove category
   const removeCategory = async (id) => {
-    try {
-      setLoading(true);
-      await deleteCategory(id);
-      await loadCategories();
-    } catch (err) {
-      setError(err.message || "Error deleting category");
-    } finally {
-      setLoading(false);
-    }
+    await deleteCategory(id);
+    await loadCategories();
   };
 
-  // Fetch one category details (for view/edit)
   const getCategoryById = async (id) => {
-    try {
-      setLoading(true);
-      const category = await fetchCategoryById(id);
-      return category;
-    } catch (err) {
-      setError(err.message || "Error fetching category");
-    } finally {
-      setLoading(false);
-    }
+    return await fetchCategoryById(id);
   };
 
   return {

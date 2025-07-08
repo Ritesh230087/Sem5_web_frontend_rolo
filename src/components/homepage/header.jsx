@@ -1,7 +1,7 @@
 import "../../styles/globals.css";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { fetchCategories } from "../../api/categoryApi";
+import { fetchCategories } from "../../services/admin/categoryService";
 
 const Header = () => {
   const [collections, setCollections] = useState([]);
