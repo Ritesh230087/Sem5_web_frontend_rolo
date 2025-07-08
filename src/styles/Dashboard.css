@@ -270,9 +270,11 @@ body {
 }
 
 .category-image {
-  width: 200px; 
-  height: 189px;  
-  object-fit: cover;
+  /* width: 200px; 
+  height: 189px;   */
+   width: 200px; 
+  height: 200px; 
+  object-fit: contain;
   border-radius: 12px;
   border: 2px solid var(--gold);
   transition: transform 0.2s ease;

@@ -24,11 +24,13 @@ export function LoginForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    mutate(formData, {
-      onSuccess: () => {
-        navigate("/home");
-      }
-    });
+    mutate(formData
+    //   , {
+    //   onSuccess: () => {
+    //     navigate("/home");
+    //   }
+    // }
+  );
   };
 
   return (

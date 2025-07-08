@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import CategoryForm from "../../components/admin/category/CategoryForm";
 
 export default function CategoryManagement() {
   const [categories, setCategories] = useState([]);

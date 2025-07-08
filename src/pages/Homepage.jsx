@@ -1,9 +1,20 @@
-import React from 'react';
+import Header from "../components/homepage/header"
+import Hero from "../components/homepage/hero"
+import Categories from "../components/homepage/categories"
+import FeaturedProducts from "../components/homepage/featured-products"
+import Footer from "../components/homepage/footer"
+import Heritage from "../components/homepage/heritage"
 
-export default function Homepage() {
+export default function HomePage() {
   return (
-    <div>
-      <h1>Welcome to the Homepage</h1>
+    <div className="min-h-screen bg-black">
+      <Header />
+      <Hero />
+      <Categories />
+      <FeaturedProducts />
+      <Heritage />
+      <Footer />
     </div>
-  );
+  )
 }
+
