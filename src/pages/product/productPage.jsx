@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Header from "../../components/homepage/header";
-import Footer from "../../components/homepage/footer";
 import ProductCard from "../../components/homepage/productCard";
 import { fetchProducts } from "../../services/admin/productService";
 import { useParams } from "react-router-dom";
@@ -64,7 +62,6 @@ export default function ProductPage() {
 
   return (
     <>
-      <Header />
       <div className="product-page-container">
         <div className="product-sidebar">
           <input
@@ -139,7 +136,6 @@ export default function ProductPage() {
           )}
         </div>
       </div>
-      <Footer />
     </>
   );
 }
