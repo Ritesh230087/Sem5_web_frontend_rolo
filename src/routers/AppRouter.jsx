@@ -3,6 +3,10 @@ import Login from "../pages/Login";
 import Signup from "../pages/Register";
 import HomePage from "../pages/Homepage";
 import ProductDetail from "../pages/product/productDetail";
+import ProductPage from "../pages/product/productPage";
+import CartPage from "../pages/cart/Cart";
+import PaymentSuccess from '../pages/payment/PaymentSuccess';
+import PaymentFail from '../pages/payment/PaymentFail';
 
 
 import AdminUserRoute from "./AdminUserRoute";
@@ -34,14 +38,18 @@ export default function AppRouter() {
         <Route element={<NormalUserRoute />}>
           <Route element={<UserLayout />}>
             <Route path="/homepage" element={<HomePage />} />
+            <Route path="/products" element={<ProductPage />} />
+            <Route path="/products/:categoryId" element={<ProductPage />} />
             <Route path="/product/:id" element={<ProductDetail />} />
+            <Route path="/cart" element={<CartPage />} />
+            <Route path="/payment-success" element={<PaymentSuccess />} />
+            <Route path="/payment-fail" element={<PaymentFail />} />
           </Route>
         </Route>
 
         {/* Admin Routes */}
         <Route path="/admin/*" element={<AdminUserRoute />}>
           <Route path="" element={<Dashboard />}>
-            {/* <Route index element={<div>Welcome to Admin Dashboard</div>} /> */}
             <Route path="users" element={<UserManagement />} />
             <Route path="categories" element={<CategoryManagement />} />
             <Route path="products" element={<ProductManagement />} />
