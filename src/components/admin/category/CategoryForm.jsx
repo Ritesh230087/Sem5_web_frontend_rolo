@@ -7,7 +7,7 @@ export default function CategoryManagement() {
   const fetchCategories = async () => {
     const res = await fetch("/api/admin/category");
     const data = await res.json();
-    if (data.success) setCategories(data.data); // as per your backend response
+    if (data.success) setCategories(data.data); 
   };
 
   useEffect(() => {
@@ -18,10 +18,7 @@ export default function CategoryManagement() {
     <div>
       <h2>Category Management</h2>
 
-      {/* Add category form with onSuccess to refresh list */}
       <CategoryForm onSuccess={fetchCategories} />
-
-      {/* Here you can show the category list */}
       <ul>
         {categories.map((cat) => (
           <li key={cat._id}>
@@ -39,4 +36,3 @@ export default function CategoryManagement() {
     </div>
   );
 }
-

@@ -2,8 +2,8 @@ import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { useRegisterUser } from "../../hooks/useRegisterUser"; // local state hook
-import { useRegisterUser as useRegisterUserTan } from "../../hooks/useRegisterUserTan"; // tanstack query hook
+import { useRegisterUser } from "../../hooks/useRegisterUser"; 
+import { useRegisterUser as useRegisterUserTan } from "../../hooks/useRegisterUserTan";
 
 export function RegisterForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -18,8 +18,8 @@ export function RegisterForm() {
   });
 
   const navigate = useNavigate();
-  const { register, isLoading } = useRegisterUser(); // for fallback
-  const registerMutation = useRegisterUserTan(); // React Query-based mutation
+  const { register, isLoading } = useRegisterUser();
+  const registerMutation = useRegisterUserTan(); 
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
