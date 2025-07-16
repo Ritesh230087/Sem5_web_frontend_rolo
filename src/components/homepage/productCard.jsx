@@ -9,7 +9,6 @@ const ProductCard = ({ product }) => {
   const { name, price, originalPrice, filepath, ribbonId, _id } = product;
   const imageUrl = getBackendImageUrl(filepath);
 
-  // Calculate discount percentage
   const discountPercent =
     originalPrice > price
       ? Math.round(((originalPrice - price) / originalPrice) * 100)
