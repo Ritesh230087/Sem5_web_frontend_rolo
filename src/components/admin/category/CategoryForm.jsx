@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 export default function CategoryManagement() {
   const [categories, setCategories] = useState([]);
 
-  // Fetch categories on mount or refresh
   const fetchCategories = async () => {
     const res = await fetch("/api/admin/category");
     const data = await res.json();
