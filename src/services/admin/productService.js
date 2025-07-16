@@ -8,89 +8,81 @@ import {
 } from "../../api/productApi"; 
 
 export async function fetchProducts() {
-  const res = await getAllProductsApi();
-  if (!res.ok) {
-    throw new Error("Failed to fetch products");
-  }
-  const responseData = await res.json();
-  
-  if (responseData && Array.isArray(responseData.data)) {
-    return responseData.data;
-  }
-  
-  return []; 
+  const response = await getAllProductsApi();
+  return response.data.data || [];
 }
 
 export async function fetchProductById(id) {
-  const res = await getProductByIdApi(id);
-  if (!res.ok) {
-    throw new Error("Failed to fetch product");
-  }
-  const responseData = await res.json();
-
-  return responseData.data;
+  const response = await getProductByIdApi(id);
+  return response.data.data;
 }
 
 export async function fetchFeaturedProducts() {
-  const res = await getFeaturedProductsApi();
-  if (!res.ok) {
-    throw new Error("Failed to fetch featured products");
-  }
-  const responseData = await res.json();
-  
-  if (responseData && Array.isArray(responseData.data)) {
-    return responseData.data;
-  }
-  
-  return []; 
+  const response = await getFeaturedProductsApi();
+  return response.data.data || [];
 }
 
 export async function createProduct(product) {
   const formData = new FormData();
   formData.append("name", product.name);
+  formData.append("description", product.description);
   formData.append("price", product.price);
   formData.append("originalPrice", product.originalPrice);
-  formData.append("description", product.description);
   formData.append("quantity", product.quantity);
   formData.append("categoryId", product.categoryId);
   if (product.ribbonId) formData.append("ribbonId", product.ribbonId);
   formData.append("featured", product.featured ? "true" : "false");
-
+  if (product.material) formData.append("material", product.material);
+  if (product.origin) formData.append("origin", product.origin);
+  if (product.care) formData.append("care", product.care);
+  if (product.warranty) formData.append("warranty", product.warranty);
+  if (product.features && product.features.length > 0) {
+    formData.append("features", JSON.stringify(product.features));
+  }
   if (product.image) {
-    formData.append("image", product.image[0]); 
+    formData.append("image", product.image);
+  }
+  if (product.extraImages && product.extraImages.length > 0) {
+    product.extraImages.forEach((file) => {
+      formData.append("extraImages", file);
+    });
   }
 
-  const res = await createProductApi(formData);
-  if (!res.ok) {
-    const errorData = await res.json();
-    throw new Error(errorData.message || "Failed to create product");
-  }
-  return await res.json();
+  const response = await createProductApi(formData);
+  return response.data;
 }
 
 export async function updateProduct(id, product) {
     const formData = new FormData();
+    // ... this FormData creation logic is also correct and remains unchanged ...
     Object.keys(product).forEach(key => {
-        if (key === 'image' && product.image && product.image.length > 0) {
-            formData.append('image', product.image[0]);
-        } else if (product[key] !== null && product[key] !== undefined) {
-            formData.append(key, product[key]);
+        if (key === 'image' || key === 'extraImages' || key === 'features') return;
+        const value = product[key];
+        if (value !== null && value !== undefined) {
+            if (typeof value === 'boolean') {
+                formData.append(key, value ? 'true' : 'false');
+            } else {
+                formData.append(key, value);
+            }
         }
     });
-
-    const res = await updateProductApi(id, formData);
-    if (!res.ok) {
-        const errorData = await res.json();
-        throw new Error(errorData.message || "Failed to update product");
+    if (product.features) {
+        formData.append('features', JSON.stringify(product.features));
     }
-    return await res.json();
+    if (product.image) {
+        formData.append('image', product.image);
+    }
+    if (product.extraImages && product.extraImages.length > 0) {
+        product.extraImages.forEach(file => {
+            formData.append('extraImages', file);
+        });
+    }
+
+    const response = await updateProductApi(id, formData);
+    return response.data;
 }
 
 export async function deleteProduct(id) {
-  const res = await deleteProductApi(id);
-  if (!res.ok) {
-    const errorData = await res.json();
-    throw new Error(errorData.message || "Failed to delete product");
-  }
-  return await res.json();
+  const response = await deleteProductApi(id);
+  return response.data;
 }
