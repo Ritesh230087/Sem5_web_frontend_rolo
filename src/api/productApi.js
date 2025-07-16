@@ -1,26 +1,19 @@
-const API_BASE = "http://localhost:5050/api/admin/product";
+import apiClient from '../api/apiCllient'; 
 
-export const getAllProductsApi = () => fetch(API_BASE);
+export const getAllProductsApi = () => apiClient.get('/admin/product');
 
-export const getProductByIdApi = (id) =>
-  fetch(`${API_BASE}/${id}`);
+export const getProductByIdApi = (id) => apiClient.get(`/admin/product/${id}`);
 
-export const getFeaturedProductsApi = () =>
-  fetch(`${API_BASE}/featured`);
+export const getFeaturedProductsApi = () => apiClient.get('/admin/product/featured');
 
 export const createProductApi = (formData) =>
-  fetch(`${API_BASE}/create`, {
-    method: "POST",
-    body: formData,
+  apiClient.post('/admin/product/create', formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
   });
 
 export const updateProductApi = (id, formData) =>
-  fetch(`${API_BASE}/${id}`, {
-    method: "PUT",
-    body: formData,
+  apiClient.put(`/admin/product/${id}`, formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
   });
 
-export const deleteProductApi = (id) =>
-  fetch(`${API_BASE}/${id}`, {
-    method: "DELETE",
-  });
+export const deleteProductApi = (id) => apiClient.delete(`/admin/product/${id}`);

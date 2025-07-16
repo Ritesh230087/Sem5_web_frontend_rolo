@@ -1,0 +1,97 @@
+.notifications-page {
+  background: #000;
+  min-height: 100vh;
+  color: #fff;
+  padding: 2rem;
+  font-family: 'Inter', sans-serif;
+}
+
+.notifications-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.notifications-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #333;
+}
+
+.notifications-header h1 {
+  font-size: 2.5rem;
+  font-weight: 300;
+  color: #D4AF37;
+  margin: 0;
+}
+
+.mark-all-read-page-btn {
+  background: #D4AF37;
+  color: #000;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+.mark-all-read-page-btn:hover {
+  background: #FFD700;
+  transform: translateY(-2px);
+}
+
+.notifications-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.notification-row {
+  background: #111;
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 1.2rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  cursor: default; /* Not clickable */
+  transition: border-color 0.3s ease-in-out;
+}
+
+.notification-row.read {
+  opacity: 0.6;
+}
+
+.notification-row.unread { border-left: 5px solid #8b5cf6 !important; }
+.notification-row.unread.category-order { border-left-color: #3b82f6 !important;  }
+.notification-row.unread.category-promotion { border-left-color: #16a34a !important; }
+.notification-row.unread.category-account { border-left-color: #f97316 !important; }
+
+
+.notification-icon-container { flex-shrink: 0; }
+.icon-bg {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #222;
+  font-size: 1.2rem;
+}
+
+.notification-content { flex-grow: 1; }
+.notification-message { font-weight: 500; margin: 0 0 0.25rem 0; color: #eee; }
+.notification-timestamp { font-size: 0.8rem; color: #888; }
+.unread-dot { width: 10px; height: 10px; background-color: #D4AF37; border-radius: 50%; flex-shrink: 0; }
+
+.no-notifications {
+  text-align: center;
+  padding: 3rem;
+  color: #888;
+  background: #111;
+  border-radius: 10px;
+  border: 1px dashed #333;
+}

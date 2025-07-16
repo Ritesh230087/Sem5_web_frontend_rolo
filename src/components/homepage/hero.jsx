@@ -10,11 +10,11 @@ const Hero = () => {
             </h1>
             <p className="hero-description">Where ancient Himalayan craftsmanship meets contemporary elegance.</p>
             <div className="hero-buttons">
-              <a href="#" className="btn-primary">
+              <a href="/products" className="btn-primary">
                 Discover Heritage
               </a>
-              <a href="#" className="btn-secondary">
-                Artisan Stories
+              <a href="/aboutus" className="btn-secondary">
+                About Rolo Nepal
               </a>
             </div>
           </div>

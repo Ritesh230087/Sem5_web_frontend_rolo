@@ -21,7 +21,6 @@ export default function ProductDetailPage() {
 
   const isLoggedIn = !!localStorage.getItem("user");
 
-  // Fetch product and set availableQty on load
   useEffect(() => {
     fetchProductById(id).then((data) => {
       setProduct(data);
@@ -36,7 +35,6 @@ export default function ProductDetailPage() {
     });
   }, [id]);
 
-  // Listen for cart changes globally and update availableQty live
   useEffect(() => {
     const updateAvailableQtyFromCart = () => {
       if (!product) return;
@@ -46,7 +44,6 @@ export default function ProductDetailPage() {
       const newAvailableQty = Math.max(product.quantity - cartQty, 0);
       setAvailableQty(newAvailableQty);
 
-      // Adjust quantity input if needed
       setQuantity((q) => (q > newAvailableQty ? newAvailableQty : (newAvailableQty > 0 ? q : 0)));
     };
 
@@ -71,7 +68,6 @@ export default function ProductDetailPage() {
       image: getBackendImageUrl(product.filepath),
     });
 
-    // Dispatch event to notify other parts of app (like ProductDetailPage) about cart update
     window.dispatchEvent(new Event("cartUpdated"));
 
     setQuantity(1);

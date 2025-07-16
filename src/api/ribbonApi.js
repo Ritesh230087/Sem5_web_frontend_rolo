@@ -1,29 +1,8 @@
-const API_BASE = "http://localhost:5050/api/admin/ribbon";
+import apiClient from '../api/apiCllient';
 
-export const getAllRibbonsApi = () => fetch(API_BASE);
+export const getAllRibbonsApi = () => apiClient.get("/admin/ribbon");
+export const getRibbonByIdApi = (id) => apiClient.get(`/admin/ribbon/${id}`);
 
-export const getRibbonByIdApi = (id) =>
-  fetch(`${API_BASE}/${id}`);
-
-export const createRibbonApi = (body) =>
-  fetch(`${API_BASE}/create`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(body),
-  });
-
-export const updateRibbonApi = (id, body) =>
-  fetch(`${API_BASE}/${id}`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(body),
-  });
-
-export const deleteRibbonApi = (id) =>
-  fetch(`${API_BASE}/${id}`, {
-    method: "DELETE",
-  });
+export const createRibbonApi = (body) => apiClient.post("/admin/ribbon/create", body);
+export const updateRibbonApi = (id, body) => apiClient.put(`/admin/ribbon/${id}`, body);
+export const deleteRibbonApi = (id) => apiClient.delete(`/admin/ribbon/${id}`);

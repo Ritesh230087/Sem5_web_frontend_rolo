@@ -1,0 +1,180 @@
+.bank-transfer-page {
+  margin-top: 60px;
+  background: #000;
+  min-height: 100vh;
+  color: #fff;
+  padding: 2rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.transfer-header {
+  max-width: 1200px;
+  margin: 0 auto 2rem auto;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.back-btn {
+  background: none;
+  border: 1px solid #D4AF37;
+  color: #D4AF37;
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.back-btn:hover { background: #D4AF37; color: #000; }
+.transfer-title { font-size: 2.5rem; font-weight: 300; color: #D4AF37; }
+
+.transfer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 3rem;
+  align-items: flex-start;
+}
+
+.transfer-content { display: flex; flex-direction: column; gap: 2rem; }
+
+/* Base card style */
+.info-card, .bank-card, .instruction-card, .upload-card {
+  background: #111;
+  border: 1px solid #333;
+  border-radius: 15px;
+  padding: 2rem;
+}
+
+/* Card titles */
+.info-card h3, .bank-card h3, .instruction-card h3, .upload-card h3 {
+  color: #D4AF37;
+  margin: 0 0 1.5rem 0;
+  font-size: 1.3rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #333;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+/* --- THE FINAL FIX for Order Information & Bank Details --- */
+.info-card .order-details, 
+.bank-card .bank-info {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1rem !important;
+}
+
+.info-card .detail-row, 
+.bank-card .bank-row {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  width: 100% !important;
+  font-size: 1rem !important;
+  border-bottom: 1px solid #333;
+  padding-bottom: 1rem;
+}
+
+.info-card .detail-row:last-child,
+.bank-card .bank-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.info-card .detail-row span, 
+.bank-card .bank-row .label {
+  color: #ccc;
+  text-align: left;
+}
+
+.info-card .detail-row span:last-child,
+.bank-card .bank-row .value {
+  color: #fff;
+  font-weight: 500;
+  text-align: right;
+}
+
+.info-card .detail-row .order-id, 
+.info-card .detail-row .amount,
+.bank-card .account-number {
+  color: #D4AF37;
+  font-weight: 600;
+}
+
+/* --- END OF FIX --- */
+
+/* Copy button */
+.copy-details { margin-top: 1.5rem; text-align: center; }
+.copy-btn {
+  background: #D4AF37; color: #000; border: none; padding: 0.8rem 1.5rem;
+  border-radius: 10px; cursor: pointer; font-weight: 600; transition: all 0.3s ease;
+}
+.copy-btn:hover { background: #FFD700; transform: translateY(-2px); }
+
+/* Instructions */
+.instruction-list { color: #ccc; line-height: 1.8; padding-left: 1.5rem; margin: 0; }
+.instruction-list li { margin-bottom: 0.8rem; }
+.instruction-list strong { color: #D4AF37; }
+
+/* Upload Section */
+.upload-card p { color: #ccc; line-height: 1.6; margin: 0 0 1.5rem 0; }
+.file-upload { margin: 1.5rem 0; }
+.file-input { display: none; }
+.file-label {
+  display: block; background: #222; border: 2px dashed #444; color: #D4AF37;
+  padding: 2rem; border-radius: 10px; cursor: pointer; text-align: center;
+  width: 100%; box-sizing: border-box; transition: all 0.3s ease;
+}
+.file-label:hover { background: #2a2a2a; border-color: #D4AF37; }
+
+.preview-section { margin: 1.5rem 0 0 0; }
+.preview-section h4 { color: #D4AF37; margin: 0 0 1rem 0; }
+.receipt-preview { max-width: 100%; max-height: 300px; border-radius: 10px; border: 1px solid #333; }
+.upload-error { color: #ff4d4d; margin-top: 1rem; text-align: center; }
+
+.submit-btn {
+  width: 100%; background: #D4AF37; color: #000; border: none; padding: 1.2rem;
+  border-radius: 25px; font-size: 1.1rem; font-weight: 600; cursor: pointer;
+  transition: all 0.3s ease; margin-top: 1.5rem;
+}
+.submit-btn:hover:not(:disabled) { background: #FFD700; transform: translateY(-2px); }
+.submit-btn:disabled { background: #555; color: #999; cursor: not-allowed; }
+.uploading-text { display: flex; align-items: center; justify-content: center; gap: 0.8rem; }
+.spinner {
+  width: 20px; height: 20px; border: 3px solid rgba(0, 0, 0, 0.3);
+  border-top-color: #000; border-radius: 50%; animation: spin 1s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Order Summary Styles */
+.order-summary { position: sticky; top: 2rem; height: fit-content; }
+.summary-card { background: #111; border: 1px solid #333; border-radius: 15px; padding: 2rem; }
+.summary-card h3 { color: #D4AF37; margin: 0 0 1.5rem 0; }
+.summary-items { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.5rem; max-height: 40vh; overflow-y: auto; padding-right: 0.5rem; }
+.summary-item { display: flex; gap: 1rem; padding: 1rem; background: #222; border-radius: 10px; }
+.summary-item img { width: 60px; height: 60px; border-radius: 8px; object-fit: cover; }
+.item-info h4 { margin: 0 0 0.3rem 0; color: #fff; font-size: 1rem; }
+.item-info p { color: #ccc; font-size: 0.9rem; margin: 0 0 0.5rem 0; }
+.item-info span { color: #D4AF37; font-weight: 600; }
+
+.summary-total {
+  border-top: 1px solid #333; padding-top: 1.5rem;
+  display: flex; flex-direction: column; gap: 0.8rem;
+}
+.total-line { display: flex; justify-content: space-between; color: #ccc; }
+.total-line.final {
+  font-size: 1.2rem; font-weight: 700; color: #D4AF37;
+  border-top: 1px solid #444; padding-top: 1rem; margin-top: 0.5rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .transfer-container { grid-template-columns: 1fr; }
+  .order-summary { position: static; }
+}
+@media (max-width: 768px) {
+  .transfer-title { font-size: 2rem; }
+  .transfer-header { flex-direction: column; align-items: flex-start; }
+}
