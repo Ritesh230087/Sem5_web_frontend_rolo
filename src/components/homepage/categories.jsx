@@ -7,9 +7,9 @@ const Categories = () => {
   const sectionRef = useRef(null);
 
   const categories = [
-    { name: "Rolo Laptop Bag", description: "Inspired by Nepalses Culture", image: "/images/rolo laptop bag.png", badge: "New" },
+    { name: "Rolo Sunglass", description: "Inspired by Nepalses Culture", image: "/images/sunglass.png", badge: "New" },
     { name: "Rolo Backpacks", description: "Inspired by Nepalses Culture", image: "/images/rolo black bag.png", badge: "Best Seller" },
-    { name: "Rolo Tote Bag", description: "Inspired by Nepalses Culture", image: "/images/rolo tote bag.jpeg", badge: "Limited" },
+    { name: "Rolo Watch", description: "Inspired by Nepalses Culture", image: "/images/watch.png", badge: "Limited" },
   ];
 
   useEffect(() => {
