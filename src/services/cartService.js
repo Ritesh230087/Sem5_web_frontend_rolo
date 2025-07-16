@@ -12,13 +12,12 @@ export function incrementCartCount(amount = 1) {
 
 export function getCartItems() {
   const items = localStorage.getItem("cart");
-  console.log("Cart from storage:", items);
   return items ? JSON.parse(items) : [];
 }
 
 export function getCartCount() {
   const items = getCartItems();
-  return items.reduce((sum, item) => sum + item.quantity, 0);
+  return items.length; 
 }
 
 export function addToCart(item) {
@@ -39,17 +38,16 @@ export function updateCartItemQuantity(productId, newQty) {
   if (index !== -1) {
     cart[index].quantity = newQty;
     if (newQty <= 0) {
-      cart.splice(index, 1); // remove if quantity 0
+      cart.splice(index, 1); 
     }
     localStorage.setItem("cart", JSON.stringify(cart));
-    window.dispatchEvent(new Event("cartUpdated")); // notify listeners
+    window.dispatchEvent(new Event("cartUpdated"));
   }
 }
 
 export function clearCart() {
   localStorage.removeItem("cart");
   window.dispatchEvent(new Event("cartUpdated"));
-
   if (incrementCartCountCallback) {
     incrementCartCountCallback(0);
   }
