@@ -80,7 +80,7 @@ export function LoginForm() {
           />
           <label htmlFor="rememberMe" className="checkbox-label">Remember me</label>
         </div>
-        <a href="#" className="forgot-link">Forgot password?</a>
+        <a href="/forgot-password" className="forgot-link">Forgot password?</a>
       </div>
 
       <button type="submit" disabled={isLoading} className="btn btn-primary">
