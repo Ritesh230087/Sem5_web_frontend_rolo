@@ -826,28 +826,7 @@ body {
   border-radius: 1rem;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 in here category is okay but the image in product is cropped
-
 
 .categories {
   padding: 6rem 0;
@@ -1375,10 +1354,6 @@ in here category is okay but the image in product is cropped
 }
 
 
-
-
-
-/* View button */
 .product-floating-button {
   position: absolute;
   left: 1rem;
@@ -1512,39 +1487,6 @@ in here category is okay but the image in product is cropped
     display: none;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .heritage {
   padding: 5rem 0;
@@ -2172,36 +2114,3 @@ html {
   background-size: 200px 100%;
   animation: shimmer 1.5s infinite;
 } 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* .product-badge {
-  position: absolute;
-  top: 0.5rem;
-  left: -2rem;
-  background-color: #facc15;
-  color: #000000;
-  font-weight: bold;
-  font-size: 0.875rem;
-  padding: 0.5rem 3rem;
-  transform: rotate(-45deg);
-  border-radius: 0.25rem;
-  z-index: 3;
-  pointer-events: none;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
-} */
